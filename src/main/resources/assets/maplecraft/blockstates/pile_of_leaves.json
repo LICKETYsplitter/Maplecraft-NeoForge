@@ -1,0 +1,28 @@
+{
+  "variants": {
+    "layers=1": {
+      "model": "maplecraft:block/pile_of_leaves2"
+    },
+    "layers=2": {
+      "model": "maplecraft:block/pile_of_leaves4"
+    },
+    "layers=3": {
+      "model": "maplecraft:block/pile_of_leaves6"
+    },
+    "layers=4": {
+      "model": "maplecraft:block/pile_of_leaves8"
+    },
+    "layers=5": {
+      "model": "maplecraft:block/pile_of_leaves10"
+    },
+    "layers=6": {
+      "model": "maplecraft:block/pile_of_leaves12"
+    },
+    "layers=7": {
+      "model": "maplecraft:block/pile_of_leaves14"
+    },
+    "layers=8": {
+      "model": "maplecraft:block/pile_of_leaves16"
+    }
+  }
+}

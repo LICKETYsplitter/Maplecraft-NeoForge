@@ -1,5 +1,16 @@
 package net.licketysplitter.maplecraft;
 
+import net.licketysplitter.maplecraft.block.ModBlocks;
+import net.licketysplitter.maplecraft.block.entity.ModBlockEntities;
+import net.licketysplitter.maplecraft.effect.ModEffects;
+import net.licketysplitter.maplecraft.item.ModItems;
+import net.licketysplitter.maplecraft.particle.ModParticles;
+import net.licketysplitter.maplecraft.screen.ModMenuTypes;
+import net.licketysplitter.maplecraft.util.ModCreativeModeTabs;
+import net.licketysplitter.maplecraft.villager.ModVillagers;
+import net.licketysplitter.maplecraft.worldgen.biome.ModFeature;
+import net.licketysplitter.maplecraft.worldgen.biome.ModTerrablender;
+import net.licketysplitter.maplecraft.worldgen.tree.ModTrunkPlacerTypes;
 import org.slf4j.Logger;
 
 import com.mojang.logging.LogUtils;
@@ -30,11 +41,24 @@ public class MaplecraftMod {
         // Do not add this line if there are no @SubscribeEvent-annotated functions in this class, like onServerStarting() below.
         NeoForge.EVENT_BUS.register(this);
 
+        ModBlocks.register(modEventBus);
+        ModParticles.register(modEventBus);
+        ModItems.register(modEventBus);
+        ModBlockEntities.register(modEventBus);
+        ModCreativeModeTabs.register(modEventBus);
+        ModVillagers.register(modEventBus);
+        ModMenuTypes.register(modEventBus);
+        ModTerrablender.registerBiomes();
+        ModFeature.register(modEventBus);
+        ModTrunkPlacerTypes.register(modEventBus);
+        ModEffects.register(modEventBus);
+
+
         // Register the item to a creative tab
         modEventBus.addListener(this::addCreative);
 
         // Register our mod's ModConfigSpec so that FML can create and load the config file for us
-        modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
+        //modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
     }
 
     private void commonSetup(FMLCommonSetupEvent event) {

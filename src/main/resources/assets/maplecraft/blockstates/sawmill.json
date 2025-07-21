@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "maplecraft:block/sawmill"
+    },
+    "facing=east": {
+      "model": "maplecraft:block/sawmill",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "maplecraft:block/sawmill",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "maplecraft:block/sawmill",
+      "y": 270
+    }
+  }
+}

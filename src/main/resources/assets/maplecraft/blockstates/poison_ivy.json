@@ -1,0 +1,105 @@
+{
+  "multipart": [
+    {
+      "apply": {
+        "model": "maplecraft:block/poison_ivy"
+      },
+      "when": {
+        "north": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "maplecraft:block/poison_ivy"
+      },
+      "when": {
+        "east": "false",
+        "north": "false",
+        "south": "false",
+        "west": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "maplecraft:block/poison_ivy",
+        "uvlock": true,
+        "y": 90
+      },
+      "when": {
+        "east": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "maplecraft:block/poison_ivy",
+        "uvlock": true,
+        "y": 90
+      },
+      "when": {
+        "east": "false",
+        "north": "false",
+        "south": "false",
+        "west": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "maplecraft:block/poison_ivy",
+        "uvlock": true,
+        "y": 180
+      },
+      "when": {
+        "south": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "maplecraft:block/poison_ivy",
+        "uvlock": true,
+        "y": 180
+      },
+      "when": {
+        "east": "false",
+        "north": "false",
+        "south": "false",
+        "west": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "maplecraft:block/poison_ivy",
+        "uvlock": true,
+        "y": 270
+      },
+      "when": {
+        "west": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "maplecraft:block/poison_ivy",
+        "uvlock": true,
+        "y": 270
+      },
+      "when": {
+        "east": "false",
+        "north": "false",
+        "south": "false",
+        "west": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "maplecraft:block/poison_ivy",
+        "uvlock": true,
+        "x": 270
+      },
+      "when": {
+        "east": "false",
+        "north": "false",
+        "south": "false",
+        "west": "false"
+      }
+    }
+  ]
+}

@@ -10,6 +10,7 @@ import net.minecraft.client.data.models.model.ModelTemplates;
 import net.minecraft.core.Holder;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 
 import java.util.stream.Stream;
@@ -73,13 +74,10 @@ public class ModModelProvider extends ModelProvider {
         itemModels.generateFlatItem(ModItems.VENISON.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.COOKED_VENISON.get(), ModelTemplates.FLAT_ITEM);
 
-        itemModels.generateFlatItem(ModItems.TWO_POINT_ANTLER.get(), ModelTemplates.FLAT_ITEM);
-        itemModels.generateFlatItem(ModItems.FOUR_POINT_ANTLER.get(), ModelTemplates.FLAT_ITEM);
-        itemModels.generateFlatItem(ModItems.SIX_POINT_ANTLER.get(), ModelTemplates.FLAT_ITEM);
-        itemModels.generateFlatItem(ModItems.EIGHT_POINT_ANTLER.get(), ModelTemplates.FLAT_ITEM);
-
         itemModels.generateFlatItem(ModItems.SAP_BUCKET.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.GREEN_APPLE.get(), ModelTemplates.FLAT_ITEM);
+
+        itemModels.generateFlatItem(ModItems.ANTLER.get(), ModelTemplates.FLAT_ITEM);
     }
 
     @Override
@@ -99,14 +97,9 @@ public class ModModelProvider extends ModelProvider {
     @Override
     protected Stream<? extends Holder<Item>> getKnownItems() {
         return ModItems.ITEMS.getEntries().stream().filter(x ->
-                x.get() != ModBlocks.APPLE_LEAVES.asItem() &&
                 x.get() != ModBlocks.ASTER.asItem() &&
                 x.get() != ModBlocks.CATTAIL.asItem() &&
-                x.get() != ModBlocks.EVAPORATOR.asItem() &&
                 x.get() != ModBlocks.FLOWERING_APPLE_LEAVES.asItem() &&
-                x.get() != ModBlocks.PILE_OF_LEAVES.asItem() &&
-                x.get() != ModBlocks.POISON_IVY.asItem() &&
-                x.get() != ModBlocks.POISON_IVY_PLANT.asItem() &&
-                x.get() != ModBlocks.SAWMILL.asItem());
+                x.get() != ModBlocks.PILE_OF_LEAVES.asItem());
     }
 }

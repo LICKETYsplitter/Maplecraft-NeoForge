@@ -23,10 +23,10 @@ public class ModCreativeModeTabs {
                         output.accept(ModItems.SUGAR_GLASS_SHARD.get());
                         output.accept(ModBlocks.SUGAR_GLASS.get());
 
-                        output.accept(ModItems.TWO_POINT_ANTLER.get());
-                        output.accept(ModItems.FOUR_POINT_ANTLER.get());
-                        output.accept(ModItems.SIX_POINT_ANTLER.get());
-                        output.accept(ModItems.EIGHT_POINT_ANTLER.get());
+                        output.accept(ModItems.ANTLER.get());
+                        //output.accept(ModItems.FOUR_POINT_ANTLER.get());
+                        //output.accept(ModItems.SIX_POINT_ANTLER.get());
+                        //output.accept(ModItems.EIGHT_POINT_ANTLER.get());
 
                         output.accept(ModBlocks.SUGAR_MAPLE_LEAVES.get());
                         output.accept(ModBlocks.RED_MAPLE_LEAVES.get());

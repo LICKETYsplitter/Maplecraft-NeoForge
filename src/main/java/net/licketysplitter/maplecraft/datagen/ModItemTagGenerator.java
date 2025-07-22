@@ -48,9 +48,6 @@ public class ModItemTagGenerator extends ItemTagsProvider {
                 .add(ModBlocks.STRIPPED_APPLE_WOOD.get().asItem());
 
         tag(ModTags.Items.ANTLERS)
-                .add(ModItems.TWO_POINT_ANTLER.get())
-                .add(ModItems.FOUR_POINT_ANTLER.get())
-                .add(ModItems.SIX_POINT_ANTLER.get())
-                .add(ModItems.EIGHT_POINT_ANTLER.get());
+                .add(ModItems.ANTLER.get());
     }
 }

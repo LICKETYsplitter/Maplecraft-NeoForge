@@ -1,0 +1,17 @@
+{
+  "fallback": "minecraft:empty",
+  "elements": [
+    {
+      "weight": 1,
+      "element": {
+        "location": "maplecraft:wetland",
+
+        "processors": "maplecraft:randomize_mud",
+
+        "projection": "terrain_matching",
+
+        "element_type": "minecraft:single_pool_element"
+      }
+    }
+  ]
+}

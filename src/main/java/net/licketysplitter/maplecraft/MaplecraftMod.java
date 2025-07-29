@@ -5,12 +5,32 @@ import net.licketysplitter.maplecraft.block.entity.ModBlockEntities;
 import net.licketysplitter.maplecraft.effect.ModEffects;
 import net.licketysplitter.maplecraft.item.ModItems;
 import net.licketysplitter.maplecraft.particle.ModParticles;
+import net.licketysplitter.maplecraft.screen.EvaporatorScreen;
 import net.licketysplitter.maplecraft.screen.ModMenuTypes;
 import net.licketysplitter.maplecraft.util.ModCreativeModeTabs;
 import net.licketysplitter.maplecraft.villager.ModVillagers;
+import net.licketysplitter.maplecraft.worldgen.biome.ModBiomeColors;
 import net.licketysplitter.maplecraft.worldgen.biome.ModFeature;
 import net.licketysplitter.maplecraft.worldgen.biome.ModTerrablender;
 import net.licketysplitter.maplecraft.worldgen.tree.ModTrunkPlacerTypes;
+import net.licketysplitter.maplecraft.block.entity.EvaporatorBlockEntity;
+import net.minecraft.client.color.block.BlockColor;
+import net.minecraft.client.renderer.BiomeColors;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.chunk.ChunkSectionLayer;
+import net.minecraft.core.BlockPos;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.BlockAndTintGetter;
+import net.minecraft.world.level.FoliageColor;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
+import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
+import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
+import net.neoforged.neoforge.client.event.RegisterNamedRenderTypesEvent;
+import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 
 import com.mojang.logging.LogUtils;
@@ -18,12 +38,13 @@ import com.mojang.logging.LogUtils;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.Mod;
-import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
+
+import java.awt.*;
 
 @Mod(MaplecraftMod.MOD_ID)
 public class MaplecraftMod {
@@ -52,6 +73,7 @@ public class MaplecraftMod {
         ModFeature.register(modEventBus);
         ModTrunkPlacerTypes.register(modEventBus);
         ModEffects.register(modEventBus);
+        //ModVillagers.register(modEventBus);
 
 
         // Register the item to a creative tab
@@ -73,5 +95,87 @@ public class MaplecraftMod {
     @SubscribeEvent
     public void onServerStarting(ServerStartingEvent event) {
 
+    }
+
+
+
+    // You can use EventBusSubscriber to automatically register all static methods in the class annotated with @SubscribeEvent
+    @EventBusSubscriber
+    public static class ClientModEvents
+    {
+        @SubscribeEvent
+        public static void onClientSetup(FMLClientSetupEvent event)
+        {
+        }
+
+        @SubscribeEvent
+        public static void registerColorResolver(RegisterColorHandlersEvent.ColorResolvers event){
+            event.register(ModBiomeColors.BIRCH_COLOR_RESOLVER);
+            event.register(ModBiomeColors.EVERGREEN_COLOR_RESOLVER);
+        }
+
+        @SubscribeEvent
+        public static void registerColoredBlocks(RegisterColorHandlersEvent.Block event){
+            event.register(new BlockColor() {
+                @Override
+                public int getColor(BlockState pState, @Nullable BlockAndTintGetter pLevel, @Nullable BlockPos pPos, int pTintIndex) {
+                    if (pLevel != null && pPos != null) {
+                        BlockEntity blockEntity = pLevel.getBlockEntity(pPos);
+
+                        if (blockEntity instanceof EvaporatorBlockEntity) {
+                            int white = 255;
+                            int red = 113;
+                            int green = 57;
+                            int blue = 9;
+                            float progress = ((EvaporatorBlockEntity) blockEntity).getAccumulatedProgress();
+
+                            red = white - (int)((white - red) * progress);
+                            green = white - (int)((white - green) * progress);
+                            blue = white - (int)((white - blue) * progress);
+
+                            Color returnColor = new Color(red, green, blue);
+                            return returnColor.hashCode();
+                        }
+                    }
+                    return 0xFFFFFF;
+                }
+            }, ModBlocks.EVAPORATOR.get());
+
+            /*
+            event.register((pState, pLevel, pPos, pTintIndex) -> pLevel != null &&
+                    pPos != null ? BiomeColors.getAverageFoliageColor(pLevel,pPos) : FoliageColor.getDefaultColor(), ModBlocks.PILE_OF_LEAVES.get());
+
+             */
+            event.register((pState, pLevel, pPos, pTintIndex) -> pLevel != null &&
+                    pPos != null ? ModBiomeColors.getBirchColor(pLevel, pPos) : FoliageColor.FOLIAGE_BIRCH, Blocks.BIRCH_LEAVES);
+
+            event.register((pState, pLevel, pPos, pTintIndex) -> pLevel != null &&
+                    pPos != null ? ModBiomeColors.getEvergreenColor(pLevel, pPos) : FoliageColor.FOLIAGE_EVERGREEN, Blocks.SPRUCE_LEAVES);
+
+            event.register((pState, pLevel, pPos, pTintIndex) -> pLevel != null &&
+                    pPos != null ? BiomeColors.getAverageFoliageColor(pLevel,pPos) : FoliageColor.FOLIAGE_DEFAULT, ModBlocks.APPLE_LEAVES.get());
+            event.register((pState, pLevel, pPos, pTintIndex) -> pLevel != null &&
+                    pPos != null ? BiomeColors.getAverageFoliageColor(pLevel,pPos) : FoliageColor.FOLIAGE_DEFAULT, ModBlocks.FLOWERING_APPLE_LEAVES.get());
+        }
+
+        /*
+        @SubscribeEvent
+        public static void registerColoredItems(RegisterColorHandlersEvent.ItemTintSources event){
+            event.register(ResourceLocation.fromNamespaceAndPath(MaplecraftMod.MOD_ID, "apple_leaves"), ItemTintColors.MAP_CODEC);
+            event.register(ResourceLocation.fromNamespaceAndPath(MaplecraftMod.MOD_ID, "flowering_apple_leaves"), ItemTintColors.MAP_CODEC);
+        }
+
+         */
+
+        @SubscribeEvent
+        public static void registerNamedRenderTypes(RegisterNamedRenderTypesEvent event){
+            event.register(ResourceLocation.fromNamespaceAndPath(MaplecraftMod.MOD_ID, "evaporator"),
+                    ChunkSectionLayer.CUTOUT, RenderType.entityTranslucent(ResourceLocation.withDefaultNamespace("textures/blocks/water_still.png")));
+        }
+
+        @SubscribeEvent
+        public static void registerScreens(RegisterMenuScreensEvent event){
+            event.register(ModMenuTypes.EVAPORATOR_MENU.get(), EvaporatorScreen::new);
+        }
     }
 }

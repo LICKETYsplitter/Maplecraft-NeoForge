@@ -1,0 +1,44 @@
+{
+  "type": "minecraft:jigsaw",
+
+  "start_pool": "maplecraft:wetland/start_pool",
+
+  "size": 2,
+
+  "max_distance_from_center": 80,
+
+  "biomes": "#maplecraft:has_structure/wetland_biomes",
+
+  "setups": [
+    {
+      "placement" : "on_land_surface"
+    }
+  ],
+
+  "step": "surface_structures",
+
+  "terrain_adaptation": "beard_box",
+
+  "start_height": {
+    "absolute": 5
+  },
+
+  "use_expansion_hack": false,
+
+  "liquid_settings": "apply_waterlogging",
+
+  "spawn_overrides": {
+    "creature": {
+      "bounding_box": "full",
+      "spawns": [
+        {
+          "type": "minecraft:frog",
+          "weight": 10,
+          "minCount": 1,
+          "maxCount": 4
+        }
+      ]
+    }
+  },
+  "pool_aliases": []
+}

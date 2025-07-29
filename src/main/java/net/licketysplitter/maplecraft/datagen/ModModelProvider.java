@@ -3,16 +3,20 @@ package net.licketysplitter.maplecraft.datagen;
 import net.licketysplitter.maplecraft.MaplecraftMod;
 import net.licketysplitter.maplecraft.block.ModBlocks;
 import net.licketysplitter.maplecraft.item.ModItems;
+import net.minecraft.client.color.item.Constant;
 import net.minecraft.client.data.models.BlockModelGenerators;
 import net.minecraft.client.data.models.ItemModelGenerators;
 import net.minecraft.client.data.models.ModelProvider;
+import net.minecraft.client.data.models.model.ModelLocationUtils;
 import net.minecraft.client.data.models.model.ModelTemplates;
+import net.minecraft.client.data.models.model.TexturedModel;
+import net.minecraft.client.renderer.item.BlockModelWrapper;
 import net.minecraft.core.Holder;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 
+import java.util.List;
 import java.util.stream.Stream;
 
 public class ModModelProvider extends ModelProvider {
@@ -23,10 +27,19 @@ public class ModModelProvider extends ModelProvider {
 
     @Override
     protected void registerModels(BlockModelGenerators blockModels, ItemModelGenerators itemModels) {
+        //render types
+        TexturedModel.Provider translucentCube = TexturedModel.CUBE.updateTemplate(template ->
+                        template.extend().renderType("minecraft:translucent").build());
+        TexturedModel.Provider cutoutCube = TexturedModel.CUBE.updateTemplate(template ->
+                template.extend().renderType("minecraft:cutout").build());
+
         //BLOCKS
 
-        blockModels.createTrivialCube(ModBlocks.MAPLE_SYRUP_BLOCK.get());
-        blockModels.createTrivialCube(ModBlocks.SUGAR_GLASS.get());
+
+        blockModels.createTrivialBlock(ModBlocks.MAPLE_SYRUP_BLOCK.get(), translucentCube);
+        //blockModels.createTrivialCube(ModBlocks.SUGAR_GLASS.get());
+
+        blockModels.createTrivialBlock(ModBlocks.SUGAR_GLASS.get(), translucentCube);
 
         blockModels.woodProvider(ModBlocks.MAPLE_LOG.get()).logWithHorizontal(ModBlocks.MAPLE_LOG.get())
                 .wood(ModBlocks.MAPLE_WOOD.get());
@@ -58,8 +71,9 @@ public class ModModelProvider extends ModelProvider {
                 .door(ModBlocks.APPLE_DOOR.get())
                 .trapdoor(ModBlocks.APPLE_TRAPDOOR.get());
 
-        blockModels.createTrivialCube(ModBlocks.SUGAR_MAPLE_LEAVES.get());
-        blockModels.createTrivialCube(ModBlocks.RED_MAPLE_LEAVES.get());
+        blockModels.createTrivialBlock(ModBlocks.SUGAR_MAPLE_LEAVES.get(), cutoutCube);
+        blockModels.createTrivialBlock(ModBlocks.RED_MAPLE_LEAVES.get(), cutoutCube);
+
 
         blockModels.createCrossBlock(ModBlocks.SUGAR_MAPLE_SAPLING.get(), BlockModelGenerators.PlantType.NOT_TINTED);
         blockModels.createCrossBlock(ModBlocks.RED_MAPLE_SAPLING.get(), BlockModelGenerators.PlantType.NOT_TINTED);
@@ -78,6 +92,12 @@ public class ModModelProvider extends ModelProvider {
         itemModels.generateFlatItem(ModItems.GREEN_APPLE.get(), ModelTemplates.FLAT_ITEM);
 
         itemModels.generateFlatItem(ModItems.ANTLER.get(), ModelTemplates.FLAT_ITEM);
+
+        itemModels.itemModelOutput.accept(ModBlocks.APPLE_LEAVES.get().asItem(),
+                new BlockModelWrapper.Unbaked(
+                        ModelLocationUtils.getModelLocation(ModBlocks.APPLE_LEAVES.get().asItem()),
+                        List.of(new Constant(-12012264))
+                ));
     }
 
     @Override

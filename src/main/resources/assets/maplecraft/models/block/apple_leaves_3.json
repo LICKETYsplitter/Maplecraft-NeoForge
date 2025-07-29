@@ -3,7 +3,8 @@
   "render_type": "minecraft:cutout",
   "textures": {
     "base": "maplecraft:block/apple_leaves",
-    "fruit": "maplecraft:block/apple_leaves_3"
+    "fruit": "maplecraft:block/apple_leaves_3",
+    "particle": "maplecraft:block/apple_leaves"
   },
   "elements": [
     {

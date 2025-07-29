@@ -2,6 +2,7 @@
   "parent": "minecraft:block/leaves",
   "render_type": "minecraft:cutout",
   "textures": {
-    "all": "maplecraft:block/apple_leaves"
+    "all": "maplecraft:block/apple_leaves",
+    "particle": "maplecraft:block/apple_leaves"
   }
 }

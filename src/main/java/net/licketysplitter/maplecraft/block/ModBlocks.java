@@ -11,6 +11,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.*;
@@ -84,11 +85,42 @@ public class ModBlocks {
     public static final DeferredBlock<Block> SUGAR_MAPLE_LEAVES = registerBlock("sugar_maple_leaves",
             (properties) -> new UntintedParticleLeavesBlock(0.01f,
                     ModParticles.SUGAR_MAPLE_PARTICLES.get(), leavesProperty(MapColor.COLOR_YELLOW)
-                    .setId(ResourceKey.create(Registries.BLOCK, ResourceLocation.fromNamespaceAndPath(MaplecraftMod.MOD_ID, "sugar_maple_leaves")))));
+                    .setId(ResourceKey.create(Registries.BLOCK, ResourceLocation.fromNamespaceAndPath(MaplecraftMod.MOD_ID, "sugar_maple_leaves")))){
+                @Override
+                public boolean isFlammable(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+                    return true;
+                }
+
+                @Override
+                public int getFlammability(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+                    return 60;
+                }
+
+                @Override
+                public int getFireSpreadSpeed(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+                    return 30;
+                }
+            }
+    );
     public static final DeferredBlock<Block> RED_MAPLE_LEAVES = registerBlock("red_maple_leaves",
             (properties) -> new UntintedParticleLeavesBlock(0.01f,
                     ModParticles.RED_MAPLE_PARTICLES.get(), leavesProperty(MapColor.COLOR_RED)
-                    .setId(ResourceKey.create(Registries.BLOCK, ResourceLocation.fromNamespaceAndPath(MaplecraftMod.MOD_ID, "red_maple_leaves")))));
+                    .setId(ResourceKey.create(Registries.BLOCK, ResourceLocation.fromNamespaceAndPath(MaplecraftMod.MOD_ID, "red_maple_leaves")))){
+                @Override
+                public boolean isFlammable(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+                    return true;
+                }
+
+                @Override
+                public int getFlammability(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+                    return 60;
+                }
+
+                @Override
+                public int getFireSpreadSpeed(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+                    return 30;
+                }
+            });
 
 
     public static final DeferredBlock<Block> RED_MAPLE_SAPLING = registerBlock("red_maple_sapling",
@@ -305,7 +337,22 @@ public class ModBlocks {
 
     public static final DeferredBlock<Block> APPLE_LEAVES = registerBlock("apple_leaves",
             (properties) -> new TintedParticleLeavesBlock(0.01f, leavesProperty(MapColor.PLANT)
-                    .setId(ResourceKey.create(Registries.BLOCK, ResourceLocation.fromNamespaceAndPath(MaplecraftMod.MOD_ID, "apple_leaves")))));
+                    .setId(ResourceKey.create(Registries.BLOCK, ResourceLocation.fromNamespaceAndPath(MaplecraftMod.MOD_ID, "apple_leaves")))){
+                @Override
+                public boolean isFlammable(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+                    return true;
+                }
+
+                @Override
+                public int getFlammability(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+                    return 60;
+                }
+
+                @Override
+                public int getFireSpreadSpeed(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+                    return 30;
+                }
+            });
 
     public static final DeferredBlock<Block> FLOWERING_APPLE_LEAVES = registerBlock("flowering_apple_leaves",
             (properties) -> new FloweringAppleLeavesBlock(leavesProperty(MapColor.PLANT)
@@ -403,6 +450,8 @@ public class ModBlocks {
                     .noOcclusion()
                     .setId(ResourceKey.create(Registries.BLOCK, ResourceLocation.fromNamespaceAndPath(MaplecraftMod.MOD_ID, "sawmill")))));
 
+
+
     private static BlockBehaviour.Properties logProperties() {
         return BlockBehaviour.Properties.of()
                 .mapColor(p_152624_ -> p_152624_.getValue(RotatedPillarBlock.AXIS) == Direction.Axis.Y ? MapColor.WOOD : MapColor.COLOR_BROWN)
@@ -428,12 +477,20 @@ public class ModBlocks {
                 .randomTicks()
                 .sound(SoundType.GRASS)
                 .noOcclusion()
-                .isValidSpawn(Blocks::ocelotOrParrot)
-                .isSuffocating(BlockBehaviour.BlockStateBase::isSuffocating)
-                .isViewBlocking(BlockBehaviour.BlockStateBase::isViewBlocking)
+                .isValidSpawn(ModBlocks::never)
+                .isViewBlocking(ModBlocks::never)
+                .isSuffocating(ModBlocks::never)
                 .ignitedByLava()
                 .pushReaction(PushReaction.DESTROY)
-                .isRedstoneConductor(BlockBehaviour.BlockStateBase::isRedstoneConductor);
+                .isRedstoneConductor(ModBlocks::never);
+    }
+
+    private static boolean never(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, EntityType<?> entityType) {return false; }
+    private static boolean always(BlockState state, BlockGetter blockGetter, BlockPos pos) {
+        return true;
+    }
+    private static boolean never(BlockState state, BlockGetter blockGetter, BlockPos pos) {
+        return false;
     }
 
     private static BlockBehaviour.Properties saplingProperty(){

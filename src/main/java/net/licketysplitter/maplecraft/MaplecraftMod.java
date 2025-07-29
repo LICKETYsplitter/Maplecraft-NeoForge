@@ -73,7 +73,6 @@ public class MaplecraftMod {
         ModFeature.register(modEventBus);
         ModTrunkPlacerTypes.register(modEventBus);
         ModEffects.register(modEventBus);
-        //ModVillagers.register(modEventBus);
 
 
         // Register the item to a creative tab

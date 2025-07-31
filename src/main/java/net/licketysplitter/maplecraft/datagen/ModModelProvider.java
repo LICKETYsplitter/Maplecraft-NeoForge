@@ -27,19 +27,9 @@ public class ModModelProvider extends ModelProvider {
 
     @Override
     protected void registerModels(BlockModelGenerators blockModels, ItemModelGenerators itemModels) {
-        //render types
-        TexturedModel.Provider translucentCube = TexturedModel.CUBE.updateTemplate(template ->
-                        template.extend().renderType("minecraft:translucent").build());
-        TexturedModel.Provider cutoutCube = TexturedModel.CUBE.updateTemplate(template ->
-                template.extend().renderType("minecraft:cutout").build());
-
         //BLOCKS
-
-
-        blockModels.createTrivialBlock(ModBlocks.MAPLE_SYRUP_BLOCK.get(), translucentCube);
-        //blockModels.createTrivialCube(ModBlocks.SUGAR_GLASS.get());
-
-        blockModels.createTrivialBlock(ModBlocks.SUGAR_GLASS.get(), translucentCube);
+        blockModels.createTrivialCube(ModBlocks.SUGAR_GLASS.get());
+        blockModels.createTrivialCube(ModBlocks.MAPLE_SYRUP_BLOCK.get());
 
         blockModels.woodProvider(ModBlocks.MAPLE_LOG.get()).logWithHorizontal(ModBlocks.MAPLE_LOG.get())
                 .wood(ModBlocks.MAPLE_WOOD.get());
@@ -71,13 +61,14 @@ public class ModModelProvider extends ModelProvider {
                 .door(ModBlocks.APPLE_DOOR.get())
                 .trapdoor(ModBlocks.APPLE_TRAPDOOR.get());
 
-        blockModels.createTrivialBlock(ModBlocks.SUGAR_MAPLE_LEAVES.get(), cutoutCube);
-        blockModels.createTrivialBlock(ModBlocks.RED_MAPLE_LEAVES.get(), cutoutCube);
+        blockModels.createTrivialCube(ModBlocks.SUGAR_MAPLE_LEAVES.get());
+        blockModels.createTrivialCube(ModBlocks.RED_MAPLE_LEAVES.get());
 
 
         blockModels.createCrossBlock(ModBlocks.SUGAR_MAPLE_SAPLING.get(), BlockModelGenerators.PlantType.NOT_TINTED);
         blockModels.createCrossBlock(ModBlocks.RED_MAPLE_SAPLING.get(), BlockModelGenerators.PlantType.NOT_TINTED);
         blockModels.createCrossBlock(ModBlocks.APPLE_SAPLING.get(), BlockModelGenerators.PlantType.NOT_TINTED);
+
 
         blockModels.createTrivialCube(ModBlocks.SINKING_MUD.get());
 

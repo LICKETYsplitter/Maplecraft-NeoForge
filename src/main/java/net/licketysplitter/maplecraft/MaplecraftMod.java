@@ -16,6 +16,7 @@ import net.licketysplitter.maplecraft.worldgen.tree.ModTrunkPlacerTypes;
 import net.licketysplitter.maplecraft.block.entity.EvaporatorBlockEntity;
 import net.minecraft.client.color.block.BlockColor;
 import net.minecraft.client.renderer.BiomeColors;
+import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.chunk.ChunkSectionLayer;
 import net.minecraft.core.BlockPos;
@@ -105,6 +106,16 @@ public class MaplecraftMod {
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event)
         {
+
+            ItemBlockRenderTypes.setRenderLayer(ModBlocks.MAPLE_SYRUP_BLOCK.get(), ChunkSectionLayer.TRANSLUCENT);
+            ItemBlockRenderTypes.setRenderLayer(ModBlocks.SUGAR_GLASS.get(), ChunkSectionLayer.TRANSLUCENT);
+
+            ItemBlockRenderTypes.setRenderLayer(ModBlocks.SUGAR_MAPLE_SAPLING.get(), ChunkSectionLayer.CUTOUT);
+            ItemBlockRenderTypes.setRenderLayer(ModBlocks.RED_MAPLE_SAPLING.get(), ChunkSectionLayer.CUTOUT);
+            ItemBlockRenderTypes.setRenderLayer(ModBlocks.APPLE_SAPLING.get(), ChunkSectionLayer.CUTOUT);
+
+            ItemBlockRenderTypes.setRenderLayer(ModBlocks.MAPLE_DOOR.get(), ChunkSectionLayer.TRANSLUCENT);
+            ItemBlockRenderTypes.setRenderLayer(ModBlocks.MAPLE_TRAPDOOR.get(), ChunkSectionLayer.TRANSLUCENT);
         }
 
         @SubscribeEvent

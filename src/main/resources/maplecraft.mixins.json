@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "package": "net.licketysplitter.maplecraft.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "VillagerProfessionLayerMixin"
+  ],
+  "client": [
+
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

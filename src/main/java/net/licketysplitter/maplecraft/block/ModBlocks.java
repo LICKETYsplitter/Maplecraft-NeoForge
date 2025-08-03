@@ -1,5 +1,6 @@
 package net.licketysplitter.maplecraft.block;
 
+import com.mojang.serialization.MapCodec;
 import net.licketysplitter.maplecraft.MaplecraftMod;
 import net.licketysplitter.maplecraft.block.custom.*;
 import net.licketysplitter.maplecraft.item.ModItems;
@@ -483,6 +484,16 @@ public class ModBlocks {
                 .ignitedByLava()
                 .pushReaction(PushReaction.DESTROY)
                 .isRedstoneConductor(ModBlocks::never);
+    }
+
+    private static BlockBehaviour.Properties signProperty(MapColor mapColor){
+        return BlockBehaviour.Properties.of()
+                .mapColor(mapColor)
+                .forceSolidOn()
+                .instrument(NoteBlockInstrument.BASS)
+                .noCollission()
+                .strength(1.0F)
+                .ignitedByLava();
     }
 
     private static boolean never(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, EntityType<?> entityType) {return false; }

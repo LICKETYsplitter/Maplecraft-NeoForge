@@ -12,6 +12,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
@@ -27,7 +28,7 @@ import net.minecraft.world.level.storage.ValueOutput;
 import net.neoforged.neoforge.items.ItemStackHandler;
 import org.jetbrains.annotations.Nullable;
 
-public class EvaporatorBlockEntity extends BaseContainerBlockEntity {
+public class EvaporatorBlockEntity extends BaseContainerBlockEntity implements MenuProvider {
     protected static final int SLOT_BUCKET_INPUT = 0;
     protected static final int SLOT_BUCKET_OUTPUT = 1;
     protected static final int SLOT_BOTTLE_INPUT = 2;

@@ -5,8 +5,11 @@ import net.licketysplitter.maplecraft.block.entity.ModBlockEntities;
 import net.licketysplitter.maplecraft.effect.ModEffects;
 import net.licketysplitter.maplecraft.item.ModItems;
 import net.licketysplitter.maplecraft.particle.ModParticles;
+import net.licketysplitter.maplecraft.recipe.ModRecipes;
 import net.licketysplitter.maplecraft.screen.EvaporatorScreen;
 import net.licketysplitter.maplecraft.screen.ModMenuTypes;
+import net.licketysplitter.maplecraft.screen.SawmillMenu;
+import net.licketysplitter.maplecraft.screen.SawmillScreen;
 import net.licketysplitter.maplecraft.util.ModCreativeModeTabs;
 import net.licketysplitter.maplecraft.villager.ModVillagers;
 import net.licketysplitter.maplecraft.worldgen.biome.ModBiomeColors;
@@ -74,6 +77,7 @@ public class MaplecraftMod {
         ModFeature.register(modEventBus);
         ModTrunkPlacerTypes.register(modEventBus);
         ModEffects.register(modEventBus);
+        ModRecipes.register(modEventBus);
 
 
         // Register the item to a creative tab
@@ -186,6 +190,7 @@ public class MaplecraftMod {
         @SubscribeEvent
         public static void registerScreens(RegisterMenuScreensEvent event){
             event.register(ModMenuTypes.EVAPORATOR_MENU.get(), EvaporatorScreen::new);
+            event.register(ModMenuTypes.SAWMILL_MENU.get(), SawmillScreen::new);
         }
     }
 }

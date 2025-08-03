@@ -16,6 +16,8 @@ public class ModMenuTypes {
 
     public static final DeferredHolder<MenuType<?>,MenuType<EvaporatorMenu>> EVAPORATOR_MENU =
             registryMenuType("evaporator_menu", EvaporatorMenu::new);
+    public static final DeferredHolder<MenuType<?>,MenuType<SawmillMenu>> SAWMILL_MENU =
+            registryMenuType("sawmill_menu", SawmillMenu::new);
 
     private static <T extends AbstractContainerMenu>DeferredHolder<MenuType<?>,MenuType<T>> registryMenuType(
             String name, IContainerFactory<T> factory){

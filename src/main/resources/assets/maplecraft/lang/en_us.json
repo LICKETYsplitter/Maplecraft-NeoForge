@@ -72,5 +72,7 @@
 
   "block.maplecraft.sawmill": "Sawmill",
 
-  "entity.minecraft.villager.maplecraft.lumberjack": "Lumberjack"
+  "entity.minecraft.villager.maplecraft.lumberjack": "Lumberjack",
+
+  "container.sawmill": "Sawmill"
 }

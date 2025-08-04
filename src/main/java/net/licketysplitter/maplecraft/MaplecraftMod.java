@@ -18,6 +18,7 @@ import net.licketysplitter.maplecraft.worldgen.biome.ModTerrablender;
 import net.licketysplitter.maplecraft.worldgen.tree.ModTrunkPlacerTypes;
 import net.licketysplitter.maplecraft.block.entity.EvaporatorBlockEntity;
 import net.minecraft.client.color.block.BlockColor;
+import net.minecraft.client.color.block.BlockColors;
 import net.minecraft.client.renderer.BiomeColors;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
@@ -170,6 +171,9 @@ public class MaplecraftMod {
                     pPos != null ? BiomeColors.getAverageFoliageColor(pLevel,pPos) : FoliageColor.FOLIAGE_DEFAULT, ModBlocks.APPLE_LEAVES.get());
             event.register((pState, pLevel, pPos, pTintIndex) -> pLevel != null &&
                     pPos != null ? BiomeColors.getAverageFoliageColor(pLevel,pPos) : FoliageColor.FOLIAGE_DEFAULT, ModBlocks.FLOWERING_APPLE_LEAVES.get());
+
+            event.register((blockState, blockAndTintGetter, blockPos, pInt) -> 0xb08623, ModBlocks.SUGAR_MAPLE_SAPLING.get());
+            event.register((blockState, blockAndTintGetter, blockPos, pInt) -> 0x8b2a2a, ModBlocks.RED_MAPLE_LEAVES.get());
         }
 
         /*

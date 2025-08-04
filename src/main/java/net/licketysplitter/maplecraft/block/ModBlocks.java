@@ -6,8 +6,10 @@ import net.licketysplitter.maplecraft.block.custom.*;
 import net.licketysplitter.maplecraft.item.ModItems;
 import net.licketysplitter.maplecraft.particle.ModParticles;
 import net.licketysplitter.maplecraft.worldgen.tree.ModTreeGrowers;
+import net.minecraft.client.color.block.BlockColors;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -84,8 +86,7 @@ public class ModBlocks {
                 }});
 
     public static final DeferredBlock<Block> SUGAR_MAPLE_LEAVES = registerBlock("sugar_maple_leaves",
-            (properties) -> new UntintedParticleLeavesBlock(0.01f,
-                    ModParticles.SUGAR_MAPLE_PARTICLES.get(), leavesProperty(MapColor.COLOR_YELLOW)
+            (properties) -> new TintedParticleLeavesBlock(0.01f, leavesProperty(MapColor.COLOR_YELLOW)
                     .setId(ResourceKey.create(Registries.BLOCK, ResourceLocation.fromNamespaceAndPath(MaplecraftMod.MOD_ID, "sugar_maple_leaves")))){
                 @Override
                 public boolean isFlammable(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
@@ -104,8 +105,7 @@ public class ModBlocks {
             }
     );
     public static final DeferredBlock<Block> RED_MAPLE_LEAVES = registerBlock("red_maple_leaves",
-            (properties) -> new UntintedParticleLeavesBlock(0.01f,
-                    ModParticles.RED_MAPLE_PARTICLES.get(), leavesProperty(MapColor.COLOR_RED)
+            (properties) -> new TintedParticleLeavesBlock(0.01f, leavesProperty(MapColor.COLOR_RED)
                     .setId(ResourceKey.create(Registries.BLOCK, ResourceLocation.fromNamespaceAndPath(MaplecraftMod.MOD_ID, "red_maple_leaves")))){
                 @Override
                 public boolean isFlammable(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
@@ -545,5 +545,7 @@ public class ModBlocks {
 
     public static void register(IEventBus eventBus) {
         BLOCKS.register(eventBus);
+
+
     }
 }

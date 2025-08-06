@@ -172,7 +172,7 @@ public class MaplecraftMod {
             event.register((pState, pLevel, pPos, pTintIndex) -> pLevel != null &&
                     pPos != null ? BiomeColors.getAverageFoliageColor(pLevel,pPos) : FoliageColor.FOLIAGE_DEFAULT, ModBlocks.FLOWERING_APPLE_LEAVES.get());
 
-            event.register((blockState, blockAndTintGetter, blockPos, pInt) -> 0xb08623, ModBlocks.SUGAR_MAPLE_SAPLING.get());
+            event.register((blockState, blockAndTintGetter, blockPos, pInt) -> 0xb08623, ModBlocks.SUGAR_MAPLE_LEAVES.get());
             event.register((blockState, blockAndTintGetter, blockPos, pInt) -> 0x8b2a2a, ModBlocks.RED_MAPLE_LEAVES.get());
         }
 

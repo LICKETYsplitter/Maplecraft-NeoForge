@@ -24,6 +24,7 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.neoforged.neoforge.common.IShearable;
 import net.neoforged.neoforge.common.Tags;
+import net.neoforged.neoforge.server.ServerLifecycleHooks;
 
 import javax.annotation.Nullable;
 import java.util.Map;
@@ -218,8 +219,8 @@ public class PoisonIvyBlock extends GrowingPlantHeadBlock implements IShearable 
     }
 
     @Override
-    protected boolean canGrowInto(BlockState p_154869_) {
-        return p_154869_.is(Blocks.AIR);
+    protected boolean canGrowInto(BlockState blockState) {
+        return blockState.is(Blocks.AIR);
     }
 
     @Override

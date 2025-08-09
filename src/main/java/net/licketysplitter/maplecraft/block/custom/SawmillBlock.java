@@ -80,7 +80,6 @@ public class SawmillBlock extends Block {
     protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
         if (!level.isClientSide) {
             player.openMenu(state.getMenuProvider(level, pos));
-            //player.awardStat(Stats.INTERACT_WITH_STONECUTTER);
         }
 
         return InteractionResult.SUCCESS;

@@ -34,7 +34,7 @@ public class EvaporatorBlockEntity extends BaseContainerBlockEntity implements M
     protected static final int SLOT_BOTTLE_INPUT = 2;
     protected static final int SLOT_BOTTLE_OUTPUT = 3;
     protected static final int SLOT_FUEL = 4;
-    private NonNullList<ItemStack> inventory = NonNullList.withSize(5, ItemStack.EMPTY);
+    //private NonNullList<ItemStack> inventory = NonNullList.withSize(5, ItemStack.EMPTY);
     public final ItemStackHandler itemStackHandler = new ItemStackHandler(5);
 
     public static final int DATA_LIT_TIME = 0;
@@ -143,7 +143,7 @@ public class EvaporatorBlockEntity extends BaseContainerBlockEntity implements M
 
     @Override
     public int getContainerSize() {
-        return inventory.size();
+        return itemStackHandler.getSlots();
     }
 
     @Override
@@ -162,12 +162,18 @@ public class EvaporatorBlockEntity extends BaseContainerBlockEntity implements M
 
     @Override
     protected NonNullList<ItemStack> getItems() {
-        return this.inventory;
+        NonNullList<ItemStack> list = NonNullList.withSize(5, ItemStack.EMPTY);
+        for(int i = 0; i < 5; i++){
+            list.set(i, this.itemStackHandler.getStackInSlot(i));
+        }
+        return list;
     }
 
     @Override
     protected void setItems(NonNullList<ItemStack> pItems) {
-        this.inventory = pItems;
+        for(int i = 0; i < 5; i++){
+            this.itemStackHandler.setStackInSlot(i, pItems.get(i));
+        }
     }
 
     @Override
@@ -215,16 +221,15 @@ public class EvaporatorBlockEntity extends BaseContainerBlockEntity implements M
 
         int emptyPan = blockEntity.firstEmptyPan();
         if(emptyPan != -1 &&
-                blockEntity.getItem(0).is(ModItems.SAP_BUCKET.get()) &&
-                blockEntity.getItem(1).getCount() < blockEntity.getItem(1).getMaxStackSize()){
+                blockEntity.getItem(SLOT_BUCKET_INPUT).is(ModItems.SAP_BUCKET.get()) &&
+                blockEntity.getItem(SLOT_BUCKET_OUTPUT).getCount() < blockEntity.getItem(SLOT_BUCKET_OUTPUT).getMaxStackSize()){
             if(blockEntity.emptyProgress <= 0) {
-                blockEntity.removeItem(0, 1);
+                blockEntity.removeItem(SLOT_BUCKET_INPUT, 1);
                 ItemStack outputItemStack = blockEntity.getItem(1);
-                int outputItemCount = outputItemStack.getCount();
-                if(outputItemCount > 0){
-                    outputItemStack.grow(1);
+                if(blockEntity.getItem(SLOT_BUCKET_OUTPUT).getCount() > 0){
+                    blockEntity.getItem(SLOT_BUCKET_OUTPUT).grow(1);
                 } else {
-                    outputItemStack = Items.BUCKET.getDefaultInstance();
+                    blockEntity.setItem(SLOT_BUCKET_OUTPUT, Items.BUCKET.getDefaultInstance());
                 }
                 blockEntity.setItem(1, outputItemStack);
                 blockEntity.pans.get(emptyPan).addFluid(1000);

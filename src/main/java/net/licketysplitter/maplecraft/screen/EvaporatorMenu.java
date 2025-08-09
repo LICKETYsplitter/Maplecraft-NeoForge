@@ -2,6 +2,7 @@ package net.licketysplitter.maplecraft.screen;
 
 import net.licketysplitter.maplecraft.block.ModBlocks;
 import net.licketysplitter.maplecraft.block.entity.EvaporatorBlockEntity;
+import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;

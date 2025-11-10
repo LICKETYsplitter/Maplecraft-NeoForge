@@ -1,12 +1,14 @@
 package net.licketysplitter.maplecraft.item;
 
 import net.licketysplitter.maplecraft.MaplecraftMod;
+import net.licketysplitter.maplecraft.entity.ModEntities;
 import net.licketysplitter.maplecraft.item.custom.AntlerItem;
 import net.licketysplitter.maplecraft.item.custom.MapleSyrupBottleItem;
 import net.licketysplitter.maplecraft.item.custom.SapBucketItem;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.component.Consumables;
 import net.neoforged.bus.api.IEventBus;
@@ -53,6 +55,13 @@ public class ModItems {
     public static final DeferredItem<Item> GREEN_APPLE = ITEMS.registerItem("green_apple",
             (properties) -> new Item(new Item.Properties().food(ModFoodProperties.GREEN_APPLE)
                     .setId(ResourceKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(MaplecraftMod.MOD_ID, "green_apple")))));
+
+    /*
+    public static final DeferredItem<Item> APPLE_BOAT = ITEMS.registerItem("apple_boat",
+            (properties -> new BoatItem(EntityType.ACACIA_BOAT, new Item.Properties().stacksTo(1)
+                    .setId(ResourceKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(MaplecraftMod.MOD_ID, "apple_boat"))))));
+
+     */
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);

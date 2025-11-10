@@ -13,8 +13,6 @@ public class ModFeature{
     public static final DeferredRegister<Feature<?>> FEATURES =
             DeferredRegister.create(BuiltInRegistries.FEATURE, MaplecraftMod.MOD_ID);
 
-    public static final DeferredHolder<Feature<?>, LeafCoverFeature> LEAF_COVER = FEATURES.register("leaf_cover",
-            () -> new LeafCoverFeature(NoneFeatureConfiguration.CODEC));
     public static final DeferredHolder<Feature<?>, CattailFeature> CATTAIL = FEATURES.register("cattail",
             () -> new CattailFeature(NoneFeatureConfiguration.CODEC));
 

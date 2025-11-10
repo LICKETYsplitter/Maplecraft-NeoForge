@@ -64,8 +64,6 @@ public class ModConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> ASTER_KEY = registerKey("aster");
     public static final ResourceKey<ConfiguredFeature<?, ?>> CATTAIL_KEY = registerKey("cattail");
 
-    public static final ResourceKey<ConfiguredFeature<?, ?>> LEAF_COVER = registerKey("leaf_cover");
-
     public static final ResourceKey<ConfiguredFeature<?, ?>> APPLE_TREE = registerKey("apple_tree");
     public static final ResourceKey<ConfiguredFeature<?, ?>> WILD_APPLE_TREE = registerKey("wild_apple_tree");
 
@@ -118,8 +116,6 @@ public class ModConfiguredFeatures {
                 RANDOM_SUGAR_MAPLE_KEY,
                 Feature.RANDOM_SELECTOR,
                 new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(fancySugar, 0.1f)), regularSugar));
-
-        FeatureUtils.register(context, LEAF_COVER, ModFeature.LEAF_COVER.get());
 
         FeatureUtils.register(context, APPLE_TREE, Feature.TREE, createApple(0).build());
         FeatureUtils.register(context, WILD_APPLE_TREE, Feature.TREE, createApple(3).build());

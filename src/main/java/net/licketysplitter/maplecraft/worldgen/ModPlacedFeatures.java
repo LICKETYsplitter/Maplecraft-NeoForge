@@ -35,8 +35,6 @@ public class ModPlacedFeatures {
     public static final ResourceKey<PlacedFeature> PLACEMENT_SUGAR_MAPLE =
             registerKey("placement_sugar_maple");
 
-    public static final ResourceKey<PlacedFeature> LEAF_COVER = registerKey("leaf_cover");
-
     public static final ResourceKey<PlacedFeature> APPLE_TREE = registerKey("apple_tree");
 
     public static final ResourceKey<PlacedFeature> DISK_MUD = registerKey("disk_mud");
@@ -86,10 +84,6 @@ public class ModPlacedFeatures {
 
         // CLEAN UP LATER
         //ModTreePlacements.bootstrap(context);
-
-        Holder<ConfiguredFeature<?, ?>> leafCover = configuredFeatures.getOrThrow(ModConfiguredFeatures.LEAF_COVER);
-
-        PlacementUtils.register(context, LEAF_COVER, leafCover, BiomeFilter.biome());
 
         register(context, APPLE_TREE, configuredFeatures.getOrThrow(ModConfiguredFeatures.WILD_APPLE_TREE),
                 VegetationPlacements.treePlacement(PlacementUtils.countExtra(1, 0.1f, 0),

@@ -3,6 +3,7 @@ package net.licketysplitter.maplecraft;
 import net.licketysplitter.maplecraft.block.ModBlocks;
 import net.licketysplitter.maplecraft.block.entity.ModBlockEntities;
 import net.licketysplitter.maplecraft.effect.ModEffects;
+import net.licketysplitter.maplecraft.entity.ModEntities;
 import net.licketysplitter.maplecraft.item.ModItems;
 import net.licketysplitter.maplecraft.particle.ModParticles;
 import net.licketysplitter.maplecraft.recipe.ModRecipes;
@@ -24,10 +25,12 @@ import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.chunk.ChunkSectionLayer;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.dispenser.BoatDispenseItemBehavior;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.world.level.FoliageColor;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.DispenserBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -79,6 +82,7 @@ public class MaplecraftMod {
         ModTrunkPlacerTypes.register(modEventBus);
         ModEffects.register(modEventBus);
         ModRecipes.register(modEventBus);
+        //ModEntities.register(modEventBus);
 
 
         // Register the item to a creative tab
@@ -89,6 +93,7 @@ public class MaplecraftMod {
     }
 
     private void commonSetup(FMLCommonSetupEvent event) {
+        //DispenserBlock.registerBehavior(ModItems.APPLE_BOAT.get(), new BoatDispenseItemBehavior(ModEntities.APPLE_BOAT.get()));
     }
 
     // Add the example block item to the building blocks tab

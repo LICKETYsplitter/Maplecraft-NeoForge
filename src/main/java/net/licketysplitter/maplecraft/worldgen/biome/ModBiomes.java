@@ -44,6 +44,8 @@ public class ModBiomes {
     public static void addFallForestExtraVegetation(BiomeGenerationSettings.Builder pGenerationSettings) {
         //pGenerationSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModPlacedFeatures.CATTAIL_PLACED_KEY);
         pGenerationSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, VegetationPlacements.PATCH_PUMPKIN);
+        pGenerationSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, VegetationPlacements.PATCH_FIREFLY_BUSH_NEAR_WATER);
+        pGenerationSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, VegetationPlacements.PATCH_BUSH);
     }
 
     private static Biome fallForestBiome(BootstrapContext<Biome> context){
@@ -67,13 +69,15 @@ public class ModBiomes {
         biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModPlacedFeatures.SUGAR_MAPLE_PLACED_KEY);
         BiomeDefaultFeatures.addOtherBirchTrees(biomeBuilder);
         BiomeDefaultFeatures.addTaigaTrees(biomeBuilder);
+        BiomeDefaultFeatures.addBushes(biomeBuilder);
         BiomeDefaultFeatures.addGiantTaigaVegetation(biomeBuilder);
         BiomeDefaultFeatures.addDesertVegetation(biomeBuilder);
         BiomeDefaultFeatures.addDefaultMushrooms(biomeBuilder);
-        addFallForestExtraVegetation(biomeBuilder);
+        biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, VegetationPlacements.PATCH_PUMPKIN);
+        biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, VegetationPlacements.PATCH_FIREFLY_BUSH_NEAR_WATER);
+        //addFallForestExtraVegetation(biomeBuilder);
         biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, AquaticPlacements.SEAGRASS_RIVER);
         BiomeDefaultFeatures.addCommonBerryBushes(biomeBuilder);
-        //biomeBuilder.addFeature(GenerationStep.Decoration.TOP_LAYER_MODIFICATION, ModPlacedFeatures.LEAF_COVER);
         biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModPlacedFeatures.APPLE_TREE);
 
         return new Biome.BiomeBuilder()

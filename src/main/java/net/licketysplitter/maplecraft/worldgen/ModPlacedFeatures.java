@@ -58,9 +58,9 @@ public class ModPlacedFeatures {
         );
 
         Holder<ConfiguredFeature<?, ?>> fancyRedMapleBees =
-                configuredFeatures.getOrThrow(ModConfiguredFeatures.FANCY_RED_MAPLE_BEES_005_KEY);
+                configuredFeatures.getOrThrow(ModConfiguredFeatures.FANCY_RED_MAPLE_BEES_0002_LEAF_LITTER_KEY);
         Holder<ConfiguredFeature<?, ?>> redMapleBees =
-                configuredFeatures.getOrThrow(ModConfiguredFeatures.RED_MAPLE_KEY);
+                configuredFeatures.getOrThrow(ModConfiguredFeatures.RED_MAPLE_LEAF_LITTER_KEY);
 
         PlacementUtils.register(context,
                 PLACEMENT_FANCY_RED_MAPLE, fancyRedMapleBees,
@@ -71,9 +71,9 @@ public class ModPlacedFeatures {
 
 
         Holder<ConfiguredFeature<?, ?>> fancySugarMapleBees =
-                configuredFeatures.getOrThrow(ModConfiguredFeatures.FANCY_SUGAR_MAPLE_BEES_005_KEY);
+                configuredFeatures.getOrThrow(ModConfiguredFeatures.FANCY_SUGAR_MAPLE_BEES_0002_LEAF_LITTER_KEY);
         Holder<ConfiguredFeature<?, ?>> sugarMapleBees =
-                configuredFeatures.getOrThrow(ModConfiguredFeatures.SUGAR_MAPLE_KEY);
+                configuredFeatures.getOrThrow(ModConfiguredFeatures.SUGAR_MAPLE_LEAF_LITTER_KEY);
 
         PlacementUtils.register(context,
                 PLACEMENT_FANCY_SUGAR_MAPLE, fancySugarMapleBees,

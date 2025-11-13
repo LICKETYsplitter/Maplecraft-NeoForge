@@ -9,6 +9,7 @@ import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.data.worldgen.features.FeatureUtils;
+import net.minecraft.data.worldgen.features.VegetationFeatures;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -29,6 +30,7 @@ import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvi
 import net.minecraft.world.level.levelgen.feature.stateproviders.RuleBasedBlockStateProvider;
 import net.minecraft.world.level.levelgen.feature.stateproviders.WeightedStateProvider;
 import net.minecraft.world.level.levelgen.feature.treedecorators.BeehiveDecorator;
+import net.minecraft.world.level.levelgen.feature.treedecorators.PlaceOnGroundDecorator;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.FancyTrunkPlacer;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.StraightTrunkPlacer;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
@@ -47,6 +49,11 @@ public class ModConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> FANCY_RED_MAPLE_BEES_005_KEY = registerKey("fancy_red_maple_bees_005");
     public static final ResourceKey<ConfiguredFeature<?, ?>> FANCY_RED_MAPLE_BEES_KEY = registerKey("fancy_red_maple_bees");
 
+    public static final ResourceKey<ConfiguredFeature<?, ?>> RED_MAPLE_LEAF_LITTER_KEY = registerKey("red_maple_leaf_litter");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> FANCY_RED_MAPLE_LEAF_LITTER_KEY = registerKey("fancy_red_maple_leaf_litter");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> RED_MAPLE_BEES_0002_LEAF_LITTER_KEY = registerKey("red_maple_bees_0002_leaf_litter");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> FANCY_RED_MAPLE_BEES_0002_LEAF_LITTER_KEY = registerKey("fancy_red_maple_bees_0002_leaf_litter");
+
     public static final ResourceKey<ConfiguredFeature<?, ?>> RANDOM_RED_MAPLE_KEY = registerKey("random_red_maple");
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> SUGAR_MAPLE_KEY = registerKey("sugar_maple");
@@ -58,6 +65,12 @@ public class ModConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> FANCY_SUGAR_MAPLE_BEES_002_KEY = registerKey("fancy_sugar_maple_bees_002");
     public static final ResourceKey<ConfiguredFeature<?, ?>> FANCY_SUGAR_MAPLE_BEES_005_KEY = registerKey("fancy_sugar_maple_bees_005");
     public static final ResourceKey<ConfiguredFeature<?, ?>> FANCY_SUGAR_MAPLE_BEES_KEY = registerKey("fancy_sugar_maple_bees");
+
+    public static final ResourceKey<ConfiguredFeature<?, ?>> SUGAR_MAPLE_LEAF_LITTER_KEY = registerKey("sugar_maple_leaf_litter");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> FANCY_SUGAR_MAPLE_LEAF_LITTER_KEY = registerKey("fancy_sugar_maple_leaf_litter");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> SUGAR_MAPLE_BEES_0002_LEAF_LITTER_KEY = registerKey("sugar_maple_bees_0002_leaf_litter");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> FANCY_SUGAR_MAPLE_BEES_0002_LEAF_LITTER_KEY = registerKey("fancy_sugar_maple_bees_0002_leaf_litter");
+
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> RANDOM_SUGAR_MAPLE_KEY = registerKey("random_sugar_maple");
 
@@ -79,7 +92,11 @@ public class ModConfiguredFeatures {
                 FANCY_RED_MAPLE_BEES_0002_KEY,
                 FANCY_RED_MAPLE_BEES_002_KEY,
                 FANCY_RED_MAPLE_BEES_005_KEY,
-                FANCY_RED_MAPLE_BEES_KEY);
+                FANCY_RED_MAPLE_BEES_KEY,
+                RED_MAPLE_LEAF_LITTER_KEY,
+                FANCY_RED_MAPLE_LEAF_LITTER_KEY,
+                RED_MAPLE_BEES_0002_LEAF_LITTER_KEY,
+                FANCY_RED_MAPLE_BEES_0002_LEAF_LITTER_KEY);
 
         createAllMaples(context, ModBlocks.SUGAR_MAPLE_LEAVES.get(),
                 SUGAR_MAPLE_KEY,
@@ -90,7 +107,11 @@ public class ModConfiguredFeatures {
                 FANCY_SUGAR_MAPLE_BEES_0002_KEY,
                 FANCY_SUGAR_MAPLE_BEES_002_KEY,
                 FANCY_SUGAR_MAPLE_BEES_005_KEY,
-                FANCY_SUGAR_MAPLE_BEES_KEY);
+                FANCY_SUGAR_MAPLE_BEES_KEY,
+                SUGAR_MAPLE_LEAF_LITTER_KEY,
+                FANCY_SUGAR_MAPLE_LEAF_LITTER_KEY,
+                SUGAR_MAPLE_BEES_0002_LEAF_LITTER_KEY,
+                FANCY_SUGAR_MAPLE_BEES_0002_LEAF_LITTER_KEY);
 
         register(context,
                 ASTER_KEY,
@@ -118,7 +139,13 @@ public class ModConfiguredFeatures {
                 new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(fancySugar, 0.1f)), regularSugar));
 
         FeatureUtils.register(context, APPLE_TREE, Feature.TREE, createApple(0).build());
-        FeatureUtils.register(context, WILD_APPLE_TREE, Feature.TREE, createApple(3).build());
+        PlaceOnGroundDecorator $$8 = new PlaceOnGroundDecorator(
+                96, 4, 2, new WeightedStateProvider(VegetationFeatures.leafLitterPatchBuilder(1, 3))
+        );
+        PlaceOnGroundDecorator $$9 = new PlaceOnGroundDecorator(
+                150, 2, 2, new WeightedStateProvider(VegetationFeatures.leafLitterPatchBuilder(1, 4))
+        );
+        FeatureUtils.register(context, WILD_APPLE_TREE, Feature.TREE, createApple(3).decorators(List.of($$8, $$9)).build());
 
         FeatureUtils.register(
                 context,
@@ -177,11 +204,19 @@ public class ModConfiguredFeatures {
                                  ResourceKey<ConfiguredFeature<?, ?>> pMapleBees0002, ResourceKey<ConfiguredFeature<?, ?>> pMapleBees002,
                                  ResourceKey<ConfiguredFeature<?, ?>> pMapleBees005, ResourceKey<ConfiguredFeature<?, ?>> pFancyMapleBees0002,
                                  ResourceKey<ConfiguredFeature<?, ?>> pFancyMapleBees002, ResourceKey<ConfiguredFeature<?, ?>> pFancyMapleBees005,
-                                 ResourceKey<ConfiguredFeature<?, ?>> pFancyMapleBees) {
+                                 ResourceKey<ConfiguredFeature<?, ?>> pFancyMapleBees,
+                                 ResourceKey<ConfiguredFeature<?, ?>> pMapleLeafLitter, ResourceKey<ConfiguredFeature<?, ?>> pFancyMapleLeafLitter,
+                                 ResourceKey<ConfiguredFeature<?, ?>> pMapleBees0002LeafLitter, ResourceKey<ConfiguredFeature<?, ?>> pFancyMapleBees0002LeafLitter) {
         BeehiveDecorator $$3 = new BeehiveDecorator(0.002F);
         BeehiveDecorator $$5 = new BeehiveDecorator(0.02F);
         BeehiveDecorator $$6 = new BeehiveDecorator(0.05F);
         BeehiveDecorator $$7 = new BeehiveDecorator(1.0F);
+        PlaceOnGroundDecorator $$8 = new PlaceOnGroundDecorator(
+                96, 4, 2, new WeightedStateProvider(VegetationFeatures.leafLitterPatchBuilder(1, 3))
+        );
+        PlaceOnGroundDecorator $$9 = new PlaceOnGroundDecorator(
+                150, 2, 2, new WeightedStateProvider(VegetationFeatures.leafLitterPatchBuilder(1, 4))
+        );
 
 
         FeatureUtils.register(pContext, pMaple, Feature.TREE, createMaple(pLeaveBlock).build());
@@ -195,5 +230,10 @@ public class ModConfiguredFeatures {
         FeatureUtils.register(pContext, pFancyMapleBees002, Feature.TREE, createFancyMaple(pLeaveBlock).decorators(List.of($$5)).build());
         FeatureUtils.register(pContext, pFancyMapleBees005, Feature.TREE, createFancyMaple(pLeaveBlock).decorators(List.of($$6)).build());
         FeatureUtils.register(pContext, pFancyMapleBees, Feature.TREE, createFancyMaple(pLeaveBlock).decorators(List.of($$7)).build());
+
+        FeatureUtils.register(pContext, pMapleLeafLitter, Feature.TREE, createMaple(pLeaveBlock).decorators(List.of($$8, $$9)).build());
+        FeatureUtils.register(pContext, pFancyMapleLeafLitter, Feature.TREE, createFancyMaple(pLeaveBlock).decorators(List.of($$8, $$9)).build());
+        FeatureUtils.register(pContext, pMapleBees0002LeafLitter, Feature.TREE, createMaple(pLeaveBlock).decorators(List.of($$3, $$8, $$9)).build());
+        FeatureUtils.register(pContext, pFancyMapleBees0002LeafLitter, Feature.TREE, createFancyMaple(pLeaveBlock).decorators(List.of($$3, $$8, $$9)).build());
     }
 }
